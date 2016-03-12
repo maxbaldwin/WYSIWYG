@@ -37,6 +37,7 @@ let people = [
 let container = document.getElementById("container");
 let input = document.getElementById("input");
 let card = document.getElementsByClassName("card"); //returning an array
+let bio = document.getElementsByClassName("bio");
 // console.log(card);
 
 function populateDom(){ //step one
@@ -49,19 +50,20 @@ for (let i=0;  i < people.length; i++) {
 
 function buildCard(person) { //step two
   container.innerHTML += `<person class="card">
-  <header>${person.title}${person.name}</header><section>${person.bio}<img src="${person.image}"></section>
+  <header>${person.title}${person.name}</header><section><p class="bio">${person.bio}</p><img src="${person.image}"></section>
   <footer>${person.lifespan.birth}-${person.lifespan.death}</footer></person>`
 }
 
 function addClickEvent(currentcard) { //step three
     for(let i = 0; i < card.length; i++) {
       let currentcard = card[i];
+      let currentbio = bio[i];
       currentcard.addEventListener("click", function(){
         removeSelected();
         input.value = "";
         input.focus();
         currentcard.classList.add("selected");
-        keyEvent(currentcard);
+        keyEvent(currentcard, currentbio);
       })
     }
 }
@@ -72,9 +74,16 @@ function removeSelected () { //step four
   }
 }
 
-function keyEvent(currentcard) {//step five  
+function keyEvent(currentcard, currentbio) {//step five  
   input.addEventListener("keyup", function(event){
-    console.log(event, currentcard);
+    if (currentcard.classList.contains("selected")) {
+      let newBio = event.currentTarget.value;
+    currentbio.innerHTML = newBio;
+      if (event.keyCode === 13) {
+        currentbio.innerHTML = input.value;
+        input.value = " ";
+      }
+    }
   })
 }
 
