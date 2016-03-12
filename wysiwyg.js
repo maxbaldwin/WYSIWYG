@@ -8,8 +8,8 @@ let people = [
   bio: "Best captain to man a NHL team in the 90's and early 00's",
   image: "http://www.thestar.com/content/dam/thestar/sports/hockey/2012/11/09/hockey_hall_of_fame_2012_inductee_joe_sakic_all_class/joe_sakicavs.jpeg",
   lifespan: {
-    birth: 1969,
-    death: 2016
+    birth: "1969",
+    death: "2016"
   }
 },
 {
@@ -18,8 +18,8 @@ let people = [
   bio: "Director of 'Fantastic Mr. Fox', 'Darjeeling Limited', and 'Life Aquatic'.",
   image: "http://cdn.collider.com/wp-content/uploads/wes-anderson1.jpg",
   lifespan: {
-    birth: 1969,
-    death: 2016
+    birth: "1969",
+    death: "2016"
   }
 },
 {
@@ -28,8 +28,8 @@ let people = [
   bio: "Owner of my favorite record label.",
   image: "https://41.media.tumblr.com/6d82d105d106f74500ef378240eb27f4/tumblr_n0eoriddhE1s0orrmo1_500.jpg",
   lifespan: {
-    birth: 1980,
-    death: 2016
+    birth: "1980",
+    death: "2016"
   }
 }
 ]
@@ -61,6 +61,7 @@ function addClickEvent(currentcard) { //step three
         input.value = "";
         input.focus();
         currentcard.classList.add("selected");
+        keyEvent(currentcard);
       })
     }
 }
@@ -71,5 +72,12 @@ function removeSelected () { //step four
   }
 }
 
+function keyEvent(currentcard) {//step five  
+  input.addEventListener("keyup", function(event){
+    console.log(event, currentcard);
+  })
+}
+
 populateDom();
+
 
